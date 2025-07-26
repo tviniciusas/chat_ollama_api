@@ -1,0 +1,29 @@
+.message-content-wrapper {
+  width: 100%;
+}
+
+.message-text {
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.message-text:last-child {
+  margin-bottom: 0;
+}
+
+.cursor {
+  color: var(--text-muted);
+  animation: blink 1s infinite;
+  font-weight: normal;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

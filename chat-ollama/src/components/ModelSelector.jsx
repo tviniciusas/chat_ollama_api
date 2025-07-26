@@ -1,0 +1,92 @@
+import { useState, useRef, useEffect } from 'react'
+import './ModelSelector.css'
+
+function ModelSelector({ onModelsChange }) {
+  const [selectedModels, setSelectedModels] = useState(['codellama:13b'])
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef(null)
+  
+  const availableModels = [
+    { id: 'qwen3:14b', name: 'Qwen3 14B', size: '9.3 GB' },
+    { id: 'codellama:13b', name: 'Codellama 13b', size: '7.4 GB' },
+    { id: 'deepseek-r1:14b', name: 'DeepSeek R1 14B', size: '9.0 GB' },
+    { id: 'qwen2.5:0.5b', name: 'Qwen2', size: '0.6 GB' },
+    { id: 'deepseek-r1:1.5b', name: 'DeepSeek R1 1.5B', size: '1.1 GB' }
+  ]
+
+  const handleModelToggle = (modelId) => {
+    const updatedModels = selectedModels.includes(modelId)
+      ? selectedModels.filter(id => id !== modelId)
+      : [...selectedModels, modelId]
+    
+    setSelectedModels(updatedModels)
+    onModelsChange(updatedModels)
+  }
+
+  const getSelectedText = () => {
+    if (selectedModels.length === 0) return 'Nenhum modelo selecionado'
+    if (selectedModels.length === 1) {
+      const model = availableModels.find(m => m.id === selectedModels[0])
+      return model?.name || selectedModels[0]
+    }
+    return `${selectedModels.length} modelos selecionados`
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  return (
+    <div className="model-selector" ref={dropdownRef}>
+      <div 
+        className={`model-select-trigger ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="selected-text">{getSelectedText()}</span>
+        <svg 
+          className={`dropdown-icon ${isOpen ? 'rotated' : ''}`} 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2"
+        >
+          <polyline points="6,9 12,15 18,9"></polyline>
+        </svg>
+      </div>
+      
+      {isOpen && (
+        <div className="model-dropdown">
+          {availableModels.map(model => (
+            <div 
+              key={model.id} 
+              className="model-option"
+              onClick={() => handleModelToggle(model.id)}
+            >
+              <input
+                type="checkbox"
+                checked={selectedModels.includes(model.id)}
+                onChange={() => {}}
+                onClick={(e) => e.stopPropagation()}
+              />
+              <div className="model-info">
+                <span className="model-name">{model.name}</span>
+                <span className="model-size">{model.size}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default ModelSelector

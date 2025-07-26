@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Light theme variables - Gemini style */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-input: #f1f3f4;
+  --text-primary: #1f1f1f;
+  --text-secondary: #5f6368;
+  --text-muted: #9aa0a6;
+  --border-color: #e8eaed;
+  --accent-primary: #1a73e8;
+  --accent-hover: #1557b0;
+  --hover-bg: #f8f9fa;
+  --icon-color: #5f6368;
+  --toggle-track-bg: #e8eaed;
+  --toggle-thumb-bg: #ffffff;
+  
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] {
+  /* Dark theme variables - Gemini style */
+  --bg-primary: #131314;
+  --bg-secondary: #1e1e1f;
+  --bg-input: #2d2e30;
+  --text-primary: #e3e3e3;
+  --text-secondary: #9aa0a6;
+  --text-muted: #5f6368;
+  --border-color: #3c4043;
+  --accent-primary: #8ab4f8;
+  --accent-hover: #aecbfa;
+  --hover-bg: #2d2e30;
+  --icon-color: #9aa0a6;
+  --toggle-track-bg: #3c4043;
+  --toggle-thumb-bg: #131314;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
