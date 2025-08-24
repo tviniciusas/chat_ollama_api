@@ -9,7 +9,7 @@ import './App.css'
 function App() {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedModels, setSelectedModels] = useState(['qwen2.5:0.5b'])
+  const [selectedModels, setSelectedModels] = useState(['gpt-oss:20b'])
   const { theme, toggleTheme } = useTheme()
   const abortControllerRef = useRef(null)
 
@@ -59,7 +59,7 @@ function App() {
         setMessages(prev => [...prev, assistantMessage])
 
         try {
-          const response = await fetch('http://192.168.0.250:11434/api/generate', {
+          const response = await fetch('http://192.168.0.210:11434/api/generate', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -2,16 +2,13 @@ import { useState, useRef, useEffect } from 'react'
 import './ModelSelector.css'
 
 function ModelSelector({ onModelsChange }) {
-  const [selectedModels, setSelectedModels] = useState(['codellama:13b'])
+  const [selectedModels, setSelectedModels] = useState(['gpt-oss:20b'])
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
   
   const availableModels = [
-    { id: 'qwen3:14b', name: 'Qwen3 14B', size: '9.3 GB' },
-    { id: 'codellama:13b', name: 'Codellama 13b', size: '7.4 GB' },
-    { id: 'deepseek-r1:14b', name: 'DeepSeek R1 14B', size: '9.0 GB' },
-    { id: 'qwen2.5:0.5b', name: 'Qwen2', size: '0.6 GB' },
-    { id: 'deepseek-r1:1.5b', name: 'DeepSeek R1 1.5B', size: '1.1 GB' }
+
+    { id: 'gpt-oss:20b', name: 'GPT 4', size: '14 GB' }
   ]
 
   const handleModelToggle = (modelId) => {
